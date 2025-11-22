@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HONEY R GAMING - SENSI HUB</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <p class="logo-text green-glow">DEV SENSI HUB</p>
+            <h1 class="logo-text sensi-hub">SENSI HUB</h1>
+            <p class="tagline">◎ Aab aap banoge headshot ke king</p>
+        </header>
+
+        <section class="search-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="weapon-search" placeholder='Search Weapon (e.g., Desert Eagle, M1887)'>
+            </div>
+            <ul id="suggestions-list"></ul> 
+        </section>
+
+        <section class="feature-buttons">
+            <div class="button-card fast-sensi">
+                <i class="fas fa-bolt"></i> FAST SENSI
+            </div>
+            <div class="button-card anti-lag">
+                <i class="fas fa-shield-alt"></i> ANTI-LAG
+            </div>
+        </section>
+
+        <section id="sensi-settings-display" class="settings-card" style="display:none;">
+            <div id="settings-content">
+                </div>
+        </section>
+
+        <section class="sensi-request-card">
+            <div class="request-content">
+                <p class="request-title"><i class="fas fa-mobile-alt"></i> Apne Phone Ki Sensi Chahiye?</p>
+                <p class="request-instruction">Yahan click karke apna model select karein</p>
+            </div>
+            <button class="external-link-btn" aria-label="Go to Phone Sensi Page">
+                <i class="fas fa-external-link-alt"></i>
+            </button>
+        </section>
+        
+        <p class="instruction-text">Select a gun or your phone model to view optimal Headshot Settings.</p>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

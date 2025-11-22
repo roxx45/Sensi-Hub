@@ -1,0 +1,151 @@
+// Data for Gun Sensi
+const WEAPON_DATA = [
+    { 
+        name: "M1887", 
+        type: "Shotgun",
+        general: 193, redDot: 183, scope2x: 173, scope4x: 163, sniper: 153, freeLook: 20,
+        proTip: "Do goli wala shotgun. Close range mein jump shot lo aur fast drag karo. Reload speed ka dhyaan rakhein."
+    },
+    { 
+        name: "Desert Eagle", 
+        type: "Pistol",
+        general: 190, redDot: 180, scope2x: 170, scope4x: 160, sniper: 150, freeLook: 19,
+        proTip: "One Tap King gun hai. Fire button ko 'J' shape mein drag karein. Mid-range mein best kaam karega."
+    },
+    { 
+        name: "UMP", 
+        type: "SMG",
+        general: 196, redDot: 186, scope2x: 176, scope4x: 166, sniper: 156, freeLook: 21,
+        proTip: "Armor penetration king hai ye SMG. Drag thoda smooth rakhein aur mid-range mein bhi headshot connect hoga."
+    },
+    { 
+        name: "Woodpecker", 
+        type: "DMR",
+        general: 179, redDot: 169, scope2x: 159, scope4x: 149, sniper: 139, freeLook: 17,
+        proTip: "Iska armor penetration high hai. Enemy ke helmet par aim lock karne ke liye joystick chhod kar fire karein."
+    },
+    { 
+        name: "AK47", 
+        type: "Assault Rifle",
+        general: 95, redDot: 90, scope2x: 88, scope4x: 85, sniper: 60, freeLook: 15,
+        proTip: "Long-range fights ke liye best. Drag Headshot lagane ke liye fire button ko dheere se upar drag karein."
+    },
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('weapon-search');
+    const suggestionsList = document.getElementById('suggestions-list');
+    const settingsDisplay = document.getElementById('sensi-settings-display');
+    const settingsContent = document.getElementById('settings-content');
+    const sensiRequestBtn = document.querySelector('.external-link-btn');
+
+    // --- Autosuggestion Logic ---
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        suggestionsList.innerHTML = ''; 
+
+        if (query.length === 0) {
+            settingsDisplay.style.display = 'none';
+            return;
+        }
+
+        // Filter weapons that include the query string
+        const filteredWeapons = WEAPON_DATA.filter(weapon => 
+            weapon.name.toLowerCase().includes(query)
+        );
+
+        if (filteredWeapons.length > 0) {
+            filteredWeapons.forEach(weapon => {
+                const li = document.createElement('li');
+                li.textContent = weapon.name;
+                li.setAttribute('data-weapon-name', weapon.name);
+                
+                li.addEventListener('click', handleSuggestionClick);
+                
+                suggestionsList.appendChild(li);
+            });
+        }
+    });
+
+    // --- Suggestion Click Handler ---
+    function handleSuggestionClick(event) {
+        const weaponName = event.target.getAttribute('data-weapon-name');
+        searchInput.value = weaponName; 
+        suggestionsList.innerHTML = ''; 
+        displaySettings(weaponName); 
+    }
+
+    // --- Display Settings Logic ---
+    function displaySettings(weaponName) {
+        const weapon = WEAPON_DATA.find(w => w.name === weaponName);
+
+        if (weapon) {
+            // --- Settings Data Mapping and Colors ---
+            const settingsMap = {
+                general: { label: "GENERAL", color: 'red' }, 
+                redDot: { label: "RED DOT", color: 'orange' }, 
+                scope2x: { label: "2X SCOPE", color: '#FFD700' }, // Yellow
+                scope4x: { label: "4X SCOPE", color: 'green' }, 
+                sniper: { label: "SNIPER SCOPE", color: 'blue' }, 
+                freeLook: { label: "FREE LOOK", color: 'purple' }
+            };
+
+            let html = `
+                <div class="gun-info-top">
+                    <span class="large-gun-name">${weapon.name.toUpperCase()}</span>
+                    <span class="gun-type-tag">${weapon.type}</span>
+                </div>
+                
+                <p class="sensi-title">${weapon.name.toUpperCase()}</p>
+                <p class="sensi-modes">HEADSHOT CONFIG LOADED</p>
+            `;
+
+            for (const key in settingsMap) {
+                const value = weapon[key];
+                // Assuming max value is 200 for progress bar (200 is used for General/Red Dot/2X/4X/Sniper to match design)
+                const max_value = (key === 'freeLook') ? 50 : 200; 
+                const percentage = (value / max_value) * 100;
+                
+                // --- Progress Bar HTML ---
+                html += `
+                    <div class="setting-item">
+                        <label>${settingsMap[key].label}</label>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${percentage}%; background-color: ${settingsMap[key].color};"></div>
+                            </div>
+                            <span class="setting-value" style="color:${settingsMap[key].color};">${value}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // --- Pro Tips Card HTML ---
+            html += `
+                <div class="pro-tips-card">
+                    <h4><i class="fas fa-info-circle"></i> PRO TIPS: ${weapon.name}</h4>
+                    <p>${weapon.proTip}</p>
+                </div>
+                <p class="footer-status">HONEY R GAMING OFFICIAL • 100% WORKING</p>
+            `;
+
+            
+            settingsContent.innerHTML = html;
+            settingsDisplay.style.display = 'block'; 
+        } else {
+            settingsDisplay.style.display = 'none';
+        }
+    }
+
+    // --- Phone Sensi Button Logic (Redirects to new page) ---
+    const handleFeatureClick = (featureName) => {
+        alert(`${featureName} feature is currently under maintenance. Please check back later!`);
+    };
+
+    document.querySelector('.fast-sensi').addEventListener('click', () => handleFeatureClick('FAST SENSI'));
+    document.querySelector('.anti-lag').addEventListener('click', () => handleFeatureClick('ANTI-LAG'));
+    
+    sensiRequestBtn.addEventListener('click', () => {
+        window.location.href = 'phone_sensi.html';
+    });
+});
