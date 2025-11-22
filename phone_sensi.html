@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Sensi Hub - Select Model</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
+        </header>
+
+        <h1 class="feature-heading green-glow">📱 Phone Model Sensi</h1>
+        <p class="tagline">Apne phone ka model chunein aur headshot settings dekhein.</p>
+        
+        <section class="selection-form">
+            <label for="phone-model" class="input-label">Select Your Phone Model:</label>
+            <div class="search-box">
+                <i class="fas fa-mobile-alt"></i>
+                <select id="phone-model">
+                    <option value="">-- Phone Model Chunein --</option>
+                    </select>
+            </div>
+        </section>
+
+        <section id="sensi-result-card" class="settings-card" style="display:none;">
+            <h2><span id="model-name-display"></span> Sensi Settings</h2>
+            
+            <p class="sensi-modes">RECOMMENDED DPI & TOUCH SPEED</p>
+            
+            <div id="settings-content">
+                </div>
+
+            <div class="pro-tips-card">
+                <h4><i class="fas fa-info-circle"></i> ADVANCED TIPS</h4>
+                <p id="advanced-tips"></p>
+            </div>
+            <p class="footer-status">RESULT POWERED BY HONEY R GAMING OFFICIAL</p>
+        </section>
+        
+    </div>
+
+    <script src="phone_sensi_script.js"></script>
+</body>
+</html>
